@@ -2,7 +2,7 @@
  * @(#) TestJSONKtorClient.kt
  *
  * json-ktor-client JSON functionality for ktor HTTP clients
- * Copyright (c) 2019 Peter Wall
+ * Copyright (c) 2019, 2020 Peter Wall
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -48,6 +48,7 @@ import net.pwall.json.Dummy1
 import net.pwall.json.Dummy3
 import net.pwall.json.Dummy4
 import net.pwall.json.JSONObject
+import net.pwall.json.isJSON
 import net.pwall.json.parseJSON
 import net.pwall.json.stringifyJSON
 
@@ -117,11 +118,13 @@ class TestJSONKtorClient {
                     jsonKtorClient {
                         toJSON<Dummy3> { obj ->
                             obj?.let {
-                                JSONObject().
-                                        putJSON("dummy1", JSONObject().
-                                                putValue("field1", it.dummy1.field1).
-                                                putValue("field2", it.dummy1.field2)).
-                                        putValue("text", it.text.reversed())
+                                JSONObject(
+                                    mapOf(
+                                        "dummy1" to JSONObject(
+                                            mapOf("field1" isJSON it.dummy1.field1, "field2" isJSON it.dummy1.field2)),
+                                        "text" isJSON it.text.reversed()
+                                    )
+                                )
                             }
                         }
                     }

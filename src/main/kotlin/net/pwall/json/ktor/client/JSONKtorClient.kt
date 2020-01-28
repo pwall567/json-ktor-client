@@ -2,7 +2,7 @@
  * @(#) JSONKtorClient.kt
  *
  * json-ktor-client JSON functionality for ktor HTTP clients
- * Copyright (c) 2019 Peter Wall
+ * Copyright (c) 2019, 2020 Peter Wall
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -26,7 +26,6 @@
 package net.pwall.json.ktor.client
 
 import kotlinx.io.core.Input
-import kotlinx.io.core.readText
 
 import io.ktor.client.call.TypeInfo
 import io.ktor.client.features.json.JsonFeature
@@ -37,8 +36,12 @@ import io.ktor.http.content.TextContent
 
 import net.pwall.json.JSONAuto
 import net.pwall.json.JSONConfig
+import net.pwall.json.JSONDeserializer
 import net.pwall.json.JSONException
+import net.pwall.json.stream.JSONStreamProcessor
 import net.pwall.json.toKType
+import net.pwall.util.pipeline.DecoderFactory
+import java.nio.ByteBuffer
 
 /**
  * JSON serializer and deserializer for ktor client calls, using the
@@ -60,14 +63,28 @@ class JSONKtorClient(private val config: JSONConfig = JSONConfig.defaultConfig) 
             TextContent(JSONAuto.stringify(data, config), contentType)
 
     /**
-     * Deserialize data object from input.
+     * Deserialize data object from input.  This uses a pipelining JSON library to parse JSON on the fly.
      *
      * @param   type    the type information
      * @param   body    the response body to be deserialized
      */
     override fun read(type: TypeInfo, body: Input): Any {
-        val text = body.readText(config.charset)
-        return JSONAuto.parse(type.reifiedType.toKType(), text, config) ?: throw JSONException("Input is null")
+        DecoderFactory.getDecoder(config.charset, JSONStreamProcessor()).use { pipeline ->
+            val buffer = ByteBuffer.allocate(config.readBufferSize)
+            while (!body.endOfInput) {
+                body.readAvailable(buffer)
+                buffer.flip()
+                while (buffer.hasRemaining())
+                    pipeline.accept(buffer.get().toInt())
+                buffer.clear()
+            }
+//            while (!body.endOfInput)
+//                pipeline.accept(body.readByte().toInt())
+            if (!pipeline.isComplete)
+                throw JSONException("Incomplete sequence")
+            return JSONDeserializer.deserialize(type.reifiedType.toKType(), pipeline.result, config) ?:
+                    throw JSONException("Input is null")
+        }
     }
 
 }

@@ -2,6 +2,15 @@
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
-## [Unreleased]
+## [0.3] - 2020-01-28
+### Changed
+- `JSONKtorClient`: Modified (optimised?) read function
+- Bumped versions of dependencies
+
+## [0.2] - 2020-01-19
+### Changed
+- `JSONKtorClient`: Updated to use `json-stream` library
+
+## [0.1] - 2019-11-17
 ### Added
 - `JSONKtorClient`: JSON content converter for ktor HTTP clients
