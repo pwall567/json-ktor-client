@@ -27,6 +27,8 @@ package net.pwall.json.ktor.client
 
 import kotlinx.io.core.Input
 
+import java.nio.ByteBuffer
+
 import io.ktor.client.call.TypeInfo
 import io.ktor.client.features.json.JsonFeature
 import io.ktor.client.features.json.JsonSerializer
@@ -41,7 +43,6 @@ import net.pwall.json.JSONException
 import net.pwall.json.stream.JSONStreamProcessor
 import net.pwall.json.toKType
 import net.pwall.util.pipeline.DecoderFactory
-import java.nio.ByteBuffer
 
 /**
  * JSON serializer and deserializer for ktor client calls, using the
@@ -78,8 +79,6 @@ class JSONKtorClient(private val config: JSONConfig = JSONConfig.defaultConfig) 
                     pipeline.accept(buffer.get().toInt())
                 buffer.clear()
             }
-//            while (!body.endOfInput)
-//                pipeline.accept(body.readByte().toInt())
             if (!pipeline.isComplete)
                 throw JSONException("Incomplete sequence")
             return JSONDeserializer.deserialize(type.reifiedType.toKType(), pipeline.result, config) ?:
