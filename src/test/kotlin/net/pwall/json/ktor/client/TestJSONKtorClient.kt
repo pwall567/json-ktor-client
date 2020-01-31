@@ -71,9 +71,10 @@ class TestJSONKtorClient {
             }
 
             client.use {
-                val response = it.get<HttpResponse>("/")
-                val result = response.receive<Dummy1>()
-                assertEquals(Dummy1("abc", 27), result)
+                it.get<HttpResponse>("/").use { response ->
+                    val result = response.receive<Dummy1>()
+                    assertEquals(Dummy1("abc", 27), result)
+                }
             }
         }
 
@@ -99,12 +100,13 @@ class TestJSONKtorClient {
             }
 
             client.use {
-                val response = it.post<HttpResponse>("/") {
+                it.post<HttpResponse>("/") {
                     contentType(ContentType.Application.Json)
                     body = Dummy1("def", 88)
+                }.use { response ->
+                    val result = response.receive<Dummy3>()
+                    assertEquals(Dummy3(Dummy1("def", 88), "OK"), result)
                 }
-                val result = response.receive<Dummy3>()
-                assertEquals(Dummy3(Dummy1("def", 88), "OK"), result)
             }
         }
 
@@ -143,12 +145,13 @@ class TestJSONKtorClient {
             }
 
             client.use {
-                val response = it.post<HttpResponse>("/") {
+                it.post<HttpResponse>("/") {
                     contentType(ContentType.Application.Json)
                     body = Dummy3(Dummy1("Hello", 2000), "WORLD")
+                }.use { response ->
+                    val result = response.receive<Dummy4>()
+                    assertEquals(Dummy4(listOf(Dummy1("Hello", 2000)), "Magenta"), result)
                 }
-                val result = response.receive<Dummy4>()
-                assertEquals(Dummy4(listOf(Dummy1("Hello", 2000)), "Magenta"), result)
             }
         }
 
