@@ -27,8 +27,6 @@ package net.pwall.json.ktor.client
 
 import kotlinx.io.core.Input
 
-import java.nio.ByteBuffer
-
 import io.ktor.client.call.TypeInfo
 import io.ktor.client.features.json.JsonFeature
 import io.ktor.client.features.json.JsonSerializer
@@ -40,7 +38,7 @@ import net.pwall.json.JSONAuto
 import net.pwall.json.JSONConfig
 import net.pwall.json.JSONDeserializer
 import net.pwall.json.JSONException
-import net.pwall.json.stream.JSONStreamProcessor
+import net.pwall.json.stream.JSONStream
 import net.pwall.json.toKType
 import net.pwall.util.pipeline.DecoderFactory
 
@@ -70,20 +68,18 @@ class JSONKtorClient(private val config: JSONConfig = JSONConfig.defaultConfig) 
      * @param   body    the response body to be deserialized
      */
     override fun read(type: TypeInfo, body: Input): Any {
-        DecoderFactory.getDecoder(config.charset, JSONStreamProcessor()).use { pipeline ->
-            val buffer = ByteBuffer.allocate(config.readBufferSize)
-            while (!body.endOfInput) {
-                body.readAvailable(buffer)
-                buffer.flip()
-                while (buffer.hasRemaining())
-                    pipeline.accept(buffer.get().toInt())
-                buffer.clear()
-            }
-            if (!pipeline.isComplete)
-                throw JSONException("Incomplete sequence")
-            return JSONDeserializer.deserialize(type.reifiedType.toKType(), pipeline.result, config) ?:
-                    throw JSONException("Input is null")
+        val pipeline = DecoderFactory.getDecoder(config.charset, JSONStream())
+        val buffer = ByteArray(config.readBufferSize)
+        while (!body.endOfInput) {
+            val bytesRead = body.readAvailable(buffer, 0, buffer.size)
+            if (bytesRead < 0)
+                break
+            for (i in 0 until bytesRead)
+                pipeline.acceptInt(buffer[i].toInt() and 0xFF)
         }
+        pipeline.close()
+        return JSONDeserializer.deserialize(type.reifiedType.toKType(), pipeline.result, config) ?:
+                throw JSONException("Input is null")
     }
 
 }

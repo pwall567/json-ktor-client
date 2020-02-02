@@ -44,25 +44,25 @@ Watch this space.
 
 ## Dependency Specification
 
-The latest version of the library is 0.3.1, and it may be obtained from the Maven Central repository.
+The latest version of the library is 0.4, and it may be obtained from the Maven Central repository.
 
 ### Maven
 ```xml
     <dependency>
       <groupId>net.pwall.json</groupId>
       <artifactId>json-ktor-client</artifactId>
-      <version>0.3.1</version>
+      <version>0.4</version>
     </dependency>
 ```
 ### Gradle
 ```groovy
-    implementation 'net.pwall.json:json-ktor-client:0.3.1'
+    implementation 'net.pwall.json:json-ktor-client:0.4'
 ```
 ### Gradle (kts)
 ```kotlin
-    implementation("net.pwall.json:json-ktor-client:0.3.1")
+    implementation("net.pwall.json:json-ktor-client:0.4")
 ```
 
 Peter Wall
 
-2020-01-31
+2020-02-02
