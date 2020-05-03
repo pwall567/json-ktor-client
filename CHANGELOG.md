@@ -2,6 +2,10 @@
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
+## [0.5] - 2020-05-03
+### Changed
+- `JSONKtorClient`: Added streaming output
+
 ## [0.4] - 2020-02-02
 ### Changed
 - `JSONKtorClient`: Switched read to use ByteArray instead of ByteBuffer
