@@ -10,7 +10,7 @@ library.
 In the `HttpClient` engine specification, use:
 ```kotlin
     val client = HttpClient(HttpClientEngine) {
-        install(JsonFeature) {
+        Json {
             jsonKtorClient {}
         }
     }
@@ -20,7 +20,7 @@ Customizations (e.g custom serialization or deserialization) may be specified wi
 `jsonKtorClient` function:
 ```kotlin
     val client = HttpClient(HttpClientEngine) {
-        install(JsonFeature) {
+        Json {
             jsonKtorClient {
                 fromJSON { json ->
                     require(json is JSONObject) { "Must be JSONObject" }
@@ -38,31 +38,34 @@ From version 0.2 onwards, this library uses the `json-streaming` library for on-
 This means that the input data is parsed into an internal form as it is being read, and avoids the need to allocate
 memory for the entire JSON text.
 
-Later versions will allow JSON array content to be streamed to a Kotlin co-routine `Channel` for asynchronous
-processing.
-Watch this space.
+## Streaming Output
+
+From version 0.5, the library will (optionally) stream output using a non-blocking output library
+([`json-kotlin-nonblocking`](https://github.com/pwall567/json-kotlin-nonblocking)).
+
+More documentation will be available shortly; in the meantime the unit test classes contain examples.
 
 ## Dependency Specification
 
-The latest version of the library is 0.3, and it may be obtained from the Maven Central repository.
+The latest version of the library is 0.5, and it may be obtained from the Maven Central repository.
 
 ### Maven
 ```xml
     <dependency>
       <groupId>net.pwall.json</groupId>
       <artifactId>json-ktor-client</artifactId>
-      <version>0.3</version>
+      <version>0.5</version>
     </dependency>
 ```
 ### Gradle
 ```groovy
-    implementation 'net.pwall.json:json-ktor-client:0.3'
+    implementation 'net.pwall.json:json-ktor-client:0.5'
 ```
 ### Gradle (kts)
 ```kotlin
-    implementation("net.pwall.json:json-ktor-client:0.3")
+    implementation("net.pwall.json:json-ktor-client:0.5")
 ```
 
 Peter Wall
 
-2020-01-28
+2020-05-03
