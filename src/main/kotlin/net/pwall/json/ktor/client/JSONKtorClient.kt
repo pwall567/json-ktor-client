@@ -123,6 +123,15 @@ fun JsonFeature.Config.jsonKtorClient(config: JSONConfig, contentType: ContentTy
 }
 
 /**
+ * Register the content converter, supplying the [JSONConfig] to be used by it.
+ *
+ * @param   config      a [JSONConfig]
+ */
+fun JsonFeature.Config.jsonKtorClient(config: JSONConfig) {
+    serializer = JSONKtorClient(config)
+}
+
+/**
  * Register the content converter and configure a new [JSONConfig] to be used by it.
  *
  * @param   contentType the content type (default `application/json`)
@@ -133,6 +142,15 @@ fun JsonFeature.Config.jsonKtorClient(contentType: ContentType = ContentType.App
         block: JSONConfig.() -> Unit = {}) {
     serializer = JSONKtorClient(JSONConfig().apply(block))
     acceptContentTypes = listOf(contentType)
+}
+
+/**
+ * Register the content converter and configure a new [JSONConfig] to be used by it.
+ *
+ * @param   block       a block of code to initialise the [JSONConfig]
+ */
+fun JsonFeature.Config.jsonKtorClient(block: JSONConfig.() -> Unit = {}) {
+    serializer = JSONKtorClient(JSONConfig().apply(block))
 }
 
 /**

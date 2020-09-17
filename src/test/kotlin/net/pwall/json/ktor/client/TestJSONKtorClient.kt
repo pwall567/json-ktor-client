@@ -63,7 +63,6 @@ import net.pwall.util.pipeline.StringCoAcceptor
 
 class TestJSONKtorClient {
 
-    @KtorExperimentalAPI
     @Test fun `client response should be converted to and from JSON`() = runBlocking {
         val client = HttpClient(MockEngine) {
             Json {
@@ -81,7 +80,6 @@ class TestJSONKtorClient {
         expect(Dummy1("abc", 27)) { response }
     }
 
-    @KtorExperimentalAPI
     @Test fun `client request body and response should be converted to and from JSON`() = runBlocking {
         val client = HttpClient(MockEngine) {
             Json {
@@ -129,7 +127,6 @@ class TestJSONKtorClient {
         }
     }
 
-    @KtorExperimentalAPI
     @Test fun `complex client request and response should be converted including custom serialization`() = runBlocking {
         val client = HttpClient(MockEngine) {
             val config = JSONConfig().apply {
