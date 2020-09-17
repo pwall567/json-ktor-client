@@ -5,10 +5,11 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>net.pwall.json</groupId>
   <artifactId>json-ktor-client</artifactId>
-  <version>0.5</version>
+  <version>0.5.1</version>
   <name>JSON functionality for ktor HTTP clients</name>
   <description>This library provides ktor client interface integration for the json-kotlin library.</description>
   <packaging>jar</packaging>
+  <url>https://github.com/pwall567/json-ktor-client</url>
 
   <parent>
     <groupId>net.pwall.maven</groupId>
@@ -140,6 +141,7 @@
   <build>
 
     <sourceDirectory>src/main/kotlin</sourceDirectory>
+    <testSourceDirectory>src/test/kotlin</testSourceDirectory>
 
     <plugins>
       <plugin>

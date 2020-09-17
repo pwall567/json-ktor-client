@@ -2,6 +2,10 @@
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
+## [0.5.1] - 2020-09-17
+### Changed
+- `JSONKtorClient`: Eliminated need for `@KtorExperimentalAPI` in most cases
+
 ## [0.5] - 2020-05-03
 ### Changed
 - `JSONKtorClient`: Added streaming output
