@@ -117,7 +117,7 @@ class JSONKtorClient(val config: JSONConfig = JSONConfig.defaultConfig) : JsonSe
  * @param   contentType the content type (default `application/json`)
  */
 @KtorExperimentalAPI
-fun JsonFeature.Config.jsonKtorClient(config: JSONConfig, contentType: ContentType = ContentType.Application.Json) {
+fun JsonFeature.Config.jsonKtorClient(config: JSONConfig, contentType: ContentType) {
     serializer = JSONKtorClient(config)
     acceptContentTypes = listOf(contentType)
 }
@@ -138,8 +138,7 @@ fun JsonFeature.Config.jsonKtorClient(config: JSONConfig) {
  * @param   block       a block of code to initialise the [JSONConfig]
  */
 @KtorExperimentalAPI
-fun JsonFeature.Config.jsonKtorClient(contentType: ContentType = ContentType.Application.Json,
-        block: JSONConfig.() -> Unit = {}) {
+fun JsonFeature.Config.jsonKtorClient(contentType: ContentType, block: JSONConfig.() -> Unit = {}) {
     serializer = JSONKtorClient(JSONConfig().apply(block))
     acceptContentTypes = listOf(contentType)
 }
