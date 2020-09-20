@@ -2,6 +2,10 @@
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
+## [0.6] - 2020-09-20
+### Changed
+- `pom.xml`: Updated Kotlin and ktor versions to 1.4.0
+
 ## [0.5.1] - 2020-09-17
 ### Changed
 - `JSONKtorClient`: Eliminated need for `@KtorExperimentalAPI` in most cases
