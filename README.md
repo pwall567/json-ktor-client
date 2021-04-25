@@ -1,5 +1,10 @@
 # json-ktor-client
 
+[![Build Status](https://travis-ci.org/pwall567/json-ktor-client.svg?branch=master)](https://travis-ci.org/pwall567/json-ktor-client)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Kotlin](https://img.shields.io/static/v1?label=Kotlin&message=v1.4.0&color=blue&logo=kotlin)](https://github.com/JetBrains/kotlin/releases/tag/v1.4.0)
+[![Maven Central](https://img.shields.io/maven-central/v/net.pwall.json/json-ktor-client?label=Maven%20Central)](https://search.maven.org/search?q=g:%22net.pwall.json%22%20AND%20a:%22json-ktor-client%22)
+
 JSON functionality for ktor HTTP clients
 
 This library provides ktor client interface integration for the [`json-kotlin`](https://github.com/pwall567/json-kotlin)
@@ -47,25 +52,25 @@ More documentation will be available shortly; in the meantime the unit test clas
 
 ## Dependency Specification
 
-The latest version of the library is 0.6, and it may be obtained from the Maven Central repository.
+The latest version of the library is 0.7, and it may be obtained from the Maven Central repository.
 
 ### Maven
 ```xml
     <dependency>
       <groupId>net.pwall.json</groupId>
       <artifactId>json-ktor-client</artifactId>
-      <version>0.6</version>
+      <version>0.7</version>
     </dependency>
 ```
 ### Gradle
 ```groovy
-    implementation 'net.pwall.json:json-ktor-client:0.6'
+    implementation 'net.pwall.json:json-ktor-client:0.7'
 ```
 ### Gradle (kts)
 ```kotlin
-    implementation("net.pwall.json:json-ktor-client:0.6")
+    implementation("net.pwall.json:json-ktor-client:0.7")
 ```
 
 Peter Wall
 
-2020-09-20
+2021-04-25
