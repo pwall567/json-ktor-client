@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>net.pwall.json</groupId>
   <artifactId>json-ktor-client</artifactId>
-  <version>0.7</version>
+  <version>0.8</version>
   <name>JSON functionality for ktor HTTP clients</name>
   <description>This library provides ktor client interface integration for the json-kotlin library.</description>
   <packaging>jar</packaging>
@@ -14,7 +14,7 @@
   <parent>
     <groupId>net.pwall.maven</groupId>
     <artifactId>maven-kotlin</artifactId>
-    <version>2.1</version>
+    <version>5.1</version>
   </parent>
 
   <properties>
@@ -51,9 +51,9 @@
 
   <pluginRepositories>
     <pluginRepository>
-      <id>jcenter</id>
-      <name>JCenter</name>
-      <url>https://jcenter.bintray.com/</url>
+      <id>central</id>
+      <name>Maven Central</name>
+      <url>https://repo1.maven.org/maven2/</url>
     </pluginRepository>
   </pluginRepositories>
 
@@ -68,37 +68,37 @@
     <dependency>
       <groupId>net.pwall.json</groupId>
       <artifactId>json-ktor</artifactId>
-      <version>1.3</version>
+      <version>1.4</version>
     </dependency>
     <dependency>
       <groupId>net.pwall.json</groupId>
       <artifactId>json-kotlin</artifactId>
-      <version>4.2</version>
+      <version>4.8</version>
     </dependency>
     <dependency>
       <groupId>net.pwall.json</groupId>
       <artifactId>jsonutil</artifactId>
-      <version>5.0</version>
+      <version>5.1</version>
     </dependency>
     <dependency>
       <groupId>net.pwall.json</groupId>
       <artifactId>json-stream</artifactId>
-      <version>0.8</version>
-    </dependency>
-    <dependency>
-      <groupId>net.pwall.util</groupId>
-      <artifactId>pipelines</artifactId>
       <version>0.9</version>
     </dependency>
     <dependency>
       <groupId>net.pwall.util</groupId>
+      <artifactId>pipelines</artifactId>
+      <version>5.0</version>
+    </dependency>
+    <dependency>
+      <groupId>net.pwall.util</groupId>
       <artifactId>co-pipelines</artifactId>
-      <version>0.6</version>
+      <version>2.1</version>
     </dependency>
     <dependency>
       <groupId>net.pwall.json</groupId>
       <artifactId>json-co-stream</artifactId>
-      <version>0.5</version>
+      <version>0.7</version>
     </dependency>
     <dependency>
       <groupId>io.ktor</groupId>
@@ -133,7 +133,7 @@
     <dependency>
       <groupId>net.pwall.json</groupId>
       <artifactId>json-kotlin-test-classes</artifactId>
-      <version>1.6</version>
+      <version>1.8</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -151,19 +151,6 @@
       <plugin>
         <groupId>org.jetbrains.dokka</groupId>
         <artifactId>dokka-maven-plugin</artifactId>
-        <configuration>
-          <sourceDirectories>
-            <dir>src/main/kotlin</dir>
-          </sourceDirectories>
-          <externalDocumentationLinks>
-            <link>
-              <url>https://pwall.net/oss/jsonutil/</url>
-            </link>
-            <link>
-              <url>https://pwall.net/oss/json-kotlin/</url>
-            </link>
-          </externalDocumentationLinks>
-        </configuration>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>

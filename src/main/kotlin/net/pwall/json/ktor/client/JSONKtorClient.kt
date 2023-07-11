@@ -57,9 +57,9 @@ import net.pwall.json.ktor.JSONKtorFunctions.createOutgoingContent
 import net.pwall.json.stream.JSONArrayCoPipeline
 import net.pwall.json.stream.JSONStream
 import net.pwall.json.toKType
-import net.pwall.util.pipeline.CoDecoderFactory
-import net.pwall.util.pipeline.DecoderFactory
-import net.pwall.util.pipeline.simpleCoAcceptor
+import net.pwall.pipeline.simpleCoAcceptor
+import net.pwall.pipeline.codec.CoDecoderFactory
+import net.pwall.pipeline.codec.DecoderFactory
 
 /**
  * JSON serializer and deserializer for ktor client calls, using the

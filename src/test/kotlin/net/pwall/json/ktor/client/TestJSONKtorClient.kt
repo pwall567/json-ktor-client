@@ -56,10 +56,10 @@ import net.pwall.json.JSONObject
 import net.pwall.json.isJSON
 import net.pwall.json.parseJSON
 import net.pwall.json.stringifyJSON
-import net.pwall.util.pipeline.CoDecoderFactory
-import net.pwall.util.pipeline.DecoderFactory
-import net.pwall.util.pipeline.StringAcceptor
-import net.pwall.util.pipeline.StringCoAcceptor
+import net.pwall.pipeline.StringAcceptor
+import net.pwall.pipeline.StringCoAcceptor
+import net.pwall.pipeline.codec.CoDecoderFactory
+import net.pwall.pipeline.codec.DecoderFactory
 
 class TestJSONKtorClient {
 
